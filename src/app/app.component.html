@@ -1,38 +1,15 @@
-
-
-
-
-<div >
-  Enter Number Of Nodes:<input type="text" style="height:50px; width:20px; " [(ngModel)]="nodesNum" >
+<div class="Nodes">
+  Enter Number Of Nodes:<input class="node" type="text" [(ngModel)]="nodesNum"  >
   <br>
   <button class="button" (click)="updateNodes()" >Submit</button>
 </div>
 
-
-
-<div *ngFor="let Node of ArrOfNodes">
-  {{Node.node}} Forward connections<input type="text" style="height:50px; width:200px; "[(ngModel)]="ArrForward[Node.num-1]"  >
-  {{Node.node}} Forward Gain<input type="text" style="height:50px; width:200px; "   [(ngModel)]="ArrGainF[Node.num-1]" >
+<div class="Table" *ngFor="let Node of ArrOfNodes">
+  {{Node.node}} Forward connections :<input class="connection" [(ngModel)]="ArrForward[Node.num-1]"  placeholder="ex:1,2,3">
+  {{Node.node}} Forward Gain :<input type="text" class="gain" [(ngModel)]="ArrGainF[Node.num-1]" placeholder="ex:1,2,3">
 </div>
 
-<button class="button" (click)="calc()" >Submit1</button>
-
-
-<!--
-  {{nodesNum}}
-<div *ngFor="let node of ArrForward">
-  {{node}}
-  </div>
-  <div *ngFor="let node of ArrBack">
-    {{node}}
-    </div>
-    <div *ngFor="let node of ArrGainF">
-      {{node}}
-      </div>
-      <div *ngFor="let node of ArrForward">
-  {{node}}
-  </div>
--->
+<button *ngIf="isShown"  id="Submit1" class="button" (click)="calc()" >Submit</button>
 <div style="width: auto;">
 <svg >
     <g *ngFor="let node of ArrOfNodes" >
@@ -42,22 +19,20 @@
                 [attr.cy]="100"
                 [attr.r]="20"
                 [attr.fill]="color"
-                  stroke="red"
+                  stroke="blue"
                 />
                 <text
-                fill="#ddd" font-size="15" font-family="Verdana"
-                 [attr.x]="100+node.num*100-8"
-                 [attr.y]="100+8">{{node.num}}</text>
-                 <defs>
-                  <marker id="markerArrow" markerWidth="13" markerHeight="13" refX="2" refY="6"
-                         orient="auto">
-                      <path d="M2,2 L2,11 L10,6 L2,2" style="fill: #000000;" />
+                fill="#fff" font-size="18"
+                [attr.x]="100+node.num*100-8"
+                [attr.y]="100+8">{{node.num}}</text>
+                <defs>
+                  <marker id="markerArrow" markerWidth="13" markerHeight="13" refX="2" refY="6" orient="auto">
+                  <path d="M2,2 L2,11 L10,6 L2,2" style="fill: #000000;" />
                   </marker>
-                 </defs>
-
+                </defs>
               <line [attr.x1]="100+node.num*100" y1="100" [attr.x2]="65+(4)*100" y2="100" class="arrow" />
         </g>
     </g>
-
     </svg>
   </div>
+
