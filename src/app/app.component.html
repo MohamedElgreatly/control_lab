@@ -16,7 +16,7 @@
   {{Node.node}} Forward Gain<input type="text" style="height:50px; width:200px; "   [(ngModel)]="ArrGainF[Node.num-1]" >
   {{Node.node}} backward connections<input type="text" style="height:50px; width:200px; "   [(ngModel)]="ArrBack[Node.num-1]" >
   {{Node.node}} backward Gain<input type="text" style="height:50px; width:200px; "  [(ngModel)]="ArrGainB[Node.num-1]">
-  
+
 </div>
 
 
@@ -34,3 +34,31 @@
   {{node}}
   </div>
 -->
+<div style="width: auto;">
+<svg >
+    <g *ngFor="let node of ArrOfNodes" >
+        <g >
+            <circle
+                [attr.cx]="100+node.num*100"
+                [attr.cy]="100"
+                [attr.r]="20"
+                [attr.fill]="color"
+                  stroke="red"
+                />
+                <text
+                fill="#ddd" font-size="15" font-family="Verdana"
+                 [attr.x]="100+node.num*100-8"
+                 [attr.y]="100+8">{{node.num}}</text>
+                 <defs>
+                  <marker id="markerArrow" markerWidth="13" markerHeight="13" refX="2" refY="6"
+                         orient="auto">
+                      <path d="M2,2 L2,11 L10,6 L2,2" style="fill: #000000;" />
+                  </marker>
+                 </defs>
+
+              <line [attr.x1]="100+node.num*100" y1="100" [attr.x2]="65+(4)*100" y2="100" class="arrow" />
+        </g>
+    </g>
+
+    </svg>
+  </div>

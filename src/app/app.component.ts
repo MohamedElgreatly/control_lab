@@ -14,7 +14,7 @@ export class AppComponent {
   ArrBack:any=[];
   ArrGainF:any=[];
   ArrGainB:any=[];
-  
+  color="green"
   updateNodes(){
     this.ArrOfNodes=[];
     for(let i=1;i<=this.nodesNum;i++)
@@ -22,6 +22,6 @@ export class AppComponent {
       this.ArrOfNodes.push({node:'Node'.concat(i.toString()),num:i});
     }
   }
-  
+
 
 }
