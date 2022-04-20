@@ -1,0 +1,36 @@
+
+
+
+
+<div >
+  Enter Number Of Nodes:<input type="text" style="height:50px; width:20px; " [(ngModel)]="nodesNum" >
+  <br>
+  <button class="button" (click)="updateNodes()" >Submit</button>
+</div>
+
+
+{{nodesNum}}
+
+<div *ngFor="let Node of ArrOfNodes">
+  {{Node.node}} Forward connections<input type="text" style="height:50px; width:200px; "[(ngModel)]="ArrForward[Node.num-1]"  >
+  {{Node.node}} Forward Gain<input type="text" style="height:50px; width:200px; "   [(ngModel)]="ArrGainF[Node.num-1]" >
+  {{Node.node}} backward connections<input type="text" style="height:50px; width:200px; "   [(ngModel)]="ArrBack[Node.num-1]" >
+  {{Node.node}} backward Gain<input type="text" style="height:50px; width:200px; "  [(ngModel)]="ArrGainB[Node.num-1]">
+  
+</div>
+
+
+<!--
+<div *ngFor="let node of ArrForward">
+  {{node}}
+  </div>
+  <div *ngFor="let node of ArrBack">
+    {{node}}
+    </div>
+    <div *ngFor="let node of ArrGainF">
+      {{node}}
+      </div>
+      <div *ngFor="let node of ArrForward">
+  {{node}}
+  </div>
+-->
