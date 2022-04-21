@@ -74,7 +74,7 @@ transition: 0.7s;
 
 svg {
   width: 100%;
-  height: 100%;
+  height: 500px;
 }
 circle{
   background-color: rgb(59, 95, 238);
