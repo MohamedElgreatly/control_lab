@@ -51,6 +51,7 @@ transition: 0.7s;
   width: 280px;
   height: 36px;
   font-size: 20px;
+  border-radius: 12px;
 }
 #Submit1{
   margin-top: 50px;
@@ -64,9 +65,9 @@ transition: 0.7s;
 }
 #Submit1:hover{
   background-color: rgb(59, 95, 238);
-border:2px solid rgb(27, 160, 255);
-color: #fff;
-transition: 0.7s;
+  border:2px solid rgb(27, 160, 255);
+  color: #fff;
+  transition: 0.7s;
   box-shadow: 2px 10px 10px 0px rgba(13, 165, 241, 0.573), -3px -8px 10px 0px rgba(10, 181, 228, 0.573);
   }
 /* This was the table styling */
