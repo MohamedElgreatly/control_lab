@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'lab';
   nodesNum:number=0;
@@ -14,9 +15,10 @@ export class AppComponent {
   ArrGainF:any=[];
   ArrForward_res:any=[]; //this the array to access elements it is 2d array
   ArrGain_res:any=[];   //this the array to access gain in numbers of every nodes it is 2d array
-
+  isShown:any=false;
   color="green"
   updateNodes(){
+    this.isShown =true;
     this.ArrOfNodes=[];
     for(let i=1;i<=this.nodesNum;i++)
     {
