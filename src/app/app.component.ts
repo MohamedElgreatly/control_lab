@@ -11,14 +11,14 @@ export class AppComponent {
   stringInput:string="";
   ArrOfNodes:any=[];
   ArrForward:any=[];
-  ArrGainF:any=[];  
+  ArrGainF:any=[];
   ArrForward_res:any=[]; //this the array to access elements it is 2d array
   ArrGain_res:any=[];   //this the array to access gain in numbers of every nodes it is 2d array
 
   color="green"
   updateNodes(){
     this.ArrOfNodes=[];
-    for(let i=1;i<this.nodesNum;i++)
+    for(let i=1;i<=this.nodesNum;i++)
     {
       this.ArrOfNodes.push({node:'Node'.concat(i.toString()),num:i});
     }
@@ -35,20 +35,23 @@ export class AppComponent {
        let str_sepG:string[]=strG.split(",");
        for(let j=0;j<str_sepF.length;j++)
        {
-          tempF[j]=Number(str_sepF[j]);
-          tempG[j]=Number(str_sepG[j]);
+        var y1: number = +str_sepF[j];
+        var y2: number = +str_sepG[j];
+
+          tempF[j]=y1;
+          tempG[j]=y2;
        }
        this.ArrForward_res.push(tempF);
        this.ArrGain_res.push(tempG);
 
 
      }
-     //console.log(this.ArrForward_res);
-     //console.log(this.ArrGain_res);
+     console.log(this.ArrForward_res);
+     console.log(this.ArrGain_res);
 
 
    }
- 
+
 
 
 }

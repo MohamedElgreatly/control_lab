@@ -17,7 +17,6 @@
 
 <button class="button" (click)="calc()" >Submit1</button>
 
-
 <!--
   {{nodesNum}}
 <div *ngFor="let node of ArrForward">
@@ -33,29 +32,35 @@
   {{node}}
   </div>
 -->
-<div style="width: auto;">
+<div style="width: auto;height: 1000;">
 <svg >
     <g *ngFor="let node of ArrOfNodes" >
         <g >
             <circle
-                [attr.cx]="100+node.num*100"
-                [attr.cy]="100"
+                [attr.cx]="100+node.num*200"
+                [attr.cy]="100+(ArrOfNodes.length%node.num)*50"
                 [attr.r]="20"
-                [attr.fill]="color"
+                fill="#ddd"
                   stroke="red"
                 />
                 <text
-                fill="#ddd" font-size="15" font-family="Verdana"
-                 [attr.x]="100+node.num*100-8"
-                 [attr.y]="100+8">{{node.num}}</text>
+                fill="black" font-size="15" font-family="Verdana"
+                 [attr.x]="100+node.num*200-8"
+                 [attr.y]="100+(ArrOfNodes.length%node.num)*50+8">{{node.num}}</text>
                  <defs>
                   <marker id="markerArrow" markerWidth="13" markerHeight="13" refX="2" refY="6"
                          orient="auto">
                       <path d="M2,2 L2,11 L10,6 L2,2" style="fill: #000000;" />
                   </marker>
                  </defs>
+             <g *ngFor="let nd of ArrForward_res[node.num-1];let i = index">
 
-              <line [attr.x1]="100+node.num*100" y1="100" [attr.x2]="65+(4)*100" y2="100" class="arrow" />
+              <line [attr.x1]="100+node.num*200" [attr.y1]="100+(ArrOfNodes.length%node.num)*50" [attr.x2]="100+nd*200-(nd-node.num)*20" [attr.y2]="100+(ArrOfNodes.length%nd)*50" class="arrow" />
+              <text
+              fill="black" font-size="15" font-family="Verdana"
+               [attr.x]="100+node.num*200+(nd-node.num)*100"
+               [attr.y]="100+(ArrOfNodes.length%node.num)*50+((nd)*20-(node.num)*20)/2">{{ArrGain_res[node.num-1][i]}}</text>
+            </g>
         </g>
     </g>
 
