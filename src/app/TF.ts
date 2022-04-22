@@ -27,11 +27,13 @@ class Edge {
 
 class Transfer_Function {
     private input: Vertex;
+    private output:Vertex;
     private directPaths: Edge[][];
     private loops: Edge[][];
 
-    constructor (input: Vertex) {
+    constructor (input: Vertex, output: Vertex) {
         this.input = input;
+        this.output = output;
         this.directPaths =[];
         this.loops = [];
         for(let i = 0;i < input.next.length;i++) {
@@ -45,7 +47,7 @@ class Transfer_Function {
     }
 
     private isLoop (path: Edge[]) {
-        for(let i = 0;i < path.length - 1;i++) {
+        for(let i = 0;i < path.length;i++) {
             if(path[i].from === path[path.length - 1].to)
                 return true;
         }
@@ -53,7 +55,7 @@ class Transfer_Function {
     }
 
     private getLoop (path: Edge[]) {
-        for(let i = 0;i < path.length - 1;i++) {
+        for(let i = 0;i < path.length;i++) {
             if(path[i].from === path[path.length - 1].to)
                 return path.slice(i, path.length);
         }
@@ -64,10 +66,10 @@ class Transfer_Function {
         let operationEnd = true;
         let newDirectPaths: Edge[][] = [];
         for(let i = 0;i < this.directPaths.length;i++){
-            if((this.directPaths[i][this.directPaths[i].length - 1].to.next).length == 0){
+            if(this.directPaths[i][this.directPaths[i].length - 1].to === this.output){
+                newDirectPaths[newDirectPaths.length] = this.directPaths[i];
                 continue;
             }
-            operationEnd = false;
             for(let k = 0;k < (this.directPaths[i][this.directPaths[i].length - 1].to.next).length;k++) {
                 let path:Edge[] = this.directPaths[i];
                 path.push(this.directPaths[i][this.directPaths[i].length - 1].to.next[k]);
@@ -76,7 +78,16 @@ class Transfer_Function {
                         this.loops[this.loops.length] = this.getLoop(path);
                     }
                 } else {
+                    operationEnd = false;
                     newDirectPaths[newDirectPaths.length] = path;
+                }
+            }
+        }
+        if(this.output.next.length != 0 && this.input !== this.output) {
+            let newLoops = new Transfer_Function(this.output, this.output).loops;
+            for(let i = 0;i < newLoops.length;i++) {
+                if(!this.loops.includes(newLoops[i])){
+                    this.loops[this.loops.length] = newLoops[i];
                 }
             }
         }
@@ -89,11 +100,11 @@ class Transfer_Function {
         }
     }
 
-    getLoops() {
+    getLoops(): Edge[][] {
         return this.loops;
     }
 
-    getDirectPaths() {
+    getDirectPaths(): Edge[][] {
         return this.directPaths;
     }
 }
