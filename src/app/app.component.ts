@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Edge } from './edge';
+import { Edge } from "./edge";
 import { Vertex } from './vertex';
 import { Transfer_Function } from './transferFunction';
 
@@ -57,11 +57,15 @@ export class AppComponent {
     let tf = new Transfer_Function(this.vertices[0], this.vertices[this.vertices.length - 1]);
     this.directPaths = tf.getDirectPaths();
     this.loops = tf.getLoops();
-    console.log(this.ArrForward_res);
-    console.log(this.ArrGain_res);
-    console.log(this.vertices);
-    console.log(this.edges);
+    // console.log(this.ArrForward_res);
+    // console.log(this.ArrGain_res);
+    // console.log(this.vertices);
+    // console.log(this.edges);
     console.log(this.directPaths);
     console.log(this.loops);
+    // let a = [1,2,3,4,5,6];
+    // let b = a.slice(2,a.length);
+    // console.log(a);
+    // console.log(b);
   }
 }

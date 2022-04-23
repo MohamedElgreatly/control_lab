@@ -1,3 +1,4 @@
+import { NONE_TYPE } from "@angular/compiler";
 import { Edge } from "./edge";
 import { Vertex } from "./vertex";
 
@@ -14,7 +15,7 @@ export class Transfer_Function {
         this.loops = [];
         for (let i = 0; i < input.next.length; i++) {
             if (this.isLoop([input.next[i]])) {
-                this.loops.push([input.next[i]]);
+                this.loops.push(this.getLoop([input.next[i]]));
             } else {
                 this.directPaths.push([input.next[i]]);
             }
@@ -23,56 +24,77 @@ export class Transfer_Function {
     }
 
     private isLoop(path: Edge[]): boolean {
+        let last: Vertex = path[path.length - 1].to;
         for (let i = 0; i < path.length; i++) {
-            if (path[i].from == path[path.length - 1].to)
+            if (path[i].from == last)
                 return true;
         }
         return false;
     }
 
-    private getLoop(path: Edge[]) {
+    private getLoop(path: Edge[]): Edge[] {
+        let last: Vertex = path[path.length - 1].to;
         for (let i = 0; i < path.length; i++) {
-            if (path[i].from == path[path.length - 1].to)
+            if (path[i].from == last)
                 return path.slice(i, path.length);
         }
         return [];
+    }
+
+    private isNewLoop(path: Edge[]): boolean {
+        let existed: boolean = false;
+        for (let i = 0; i < this.loops.length; i++) {
+            if (this.loops[i].length == path.length) {
+                for (var d = 0; d < path.length; d++) {
+                    if (this.loops[i][d] == path[0]) {
+                        break;
+                    }
+                }
+                for (let k = 0; k < path.length; k++) {
+                    if (this.loops[i][(d + k) % path.length] == path[k]) {
+                        existed = true;
+                    } else {
+                        existed = false;
+                        break;
+                    }
+                }
+                if (existed) {
+                    return existed;
+                }
+            }
+        }
+        return !existed;
     }
 
     private operate() {
         let operationEnd = true;
         let newDirectPaths: Edge[][] = [];
         for (let i = 0; i < this.directPaths.length; i++) {
-            if (this.directPaths[i][this.directPaths[i].length - 1].to == this.output) {
-                newDirectPaths.push(this.directPaths[i]);
+            let path: Edge[] = this.directPaths[i];
+            let last: Vertex = path[path.length - 1].to;
+            if (last == this.output) {
+                newDirectPaths.push(path);
                 continue;
             }
             operationEnd = false;
-            for (let k = 0; k < (this.directPaths[i][this.directPaths[i].length - 1].to.next).length; k++) {
-                let path: Edge[] = this.directPaths[i];
-                path.push(this.directPaths[i][this.directPaths[i].length - 1].to.next[k]);
-                operationEnd = false;
+            for (let j = 0; j < last.next.length; j++) {
+                path.push(last.next[j]);
                 if (this.isLoop(path)) {
-                    if (!this.loops.includes(this.getLoop(path))) {
-                        this.loops.push(this.getLoop(path));
-                    }
+                    this.loops.push(this.getLoop(path));
+                    path = path.slice(0, path.length - 1);
                     continue;
                 }
                 newDirectPaths.push(path);
+                path = path.slice(0, path.length - 1);
             }
         }
-        /*if (this.output.next.length != 0 && this.input != this.output) {
-            let newLoops = new Transfer_Function(this.output, this.output).loops;
-            for (let i = 0; i < newLoops.length; i++) {
-                if (!this.loops.includes(newLoops[i])) {
-                    this.loops.push(newLoops[i]);
-                }
-            }
-        }*/
         if (operationEnd) {
+            this.directPaths = newDirectPaths;
             return;
         } else {
             this.directPaths = newDirectPaths;
             newDirectPaths = [];
+            operationEnd = true;
             this.operate();
         }
     }
