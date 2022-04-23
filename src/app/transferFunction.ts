@@ -22,7 +22,7 @@ export class Transfer_Function {
         this.operate();
     }
 
-    private isLoop(path: Edge[]) {
+    private isLoop(path: Edge[]): boolean {
         for (let i = 0; i < path.length; i++) {
             if (path[i].from == path[path.length - 1].to)
                 return true;
