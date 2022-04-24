@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,6 +16,12 @@ export class AppComponent {
   ArrGain_res:any=[];   //this the array to access gain in numbers of every nodes it is 2d array
   isShown:any=false;
   color="green"
+  ex:string=""
+  curve(nd:number,num:number,x1:number,y1:number,x2:number,y2:number){
+    this.ex="M"+x1+" "+y1+","+"Q"+(x1+(nd-num)*100)+" "+(y1+(nd-num)*10)+","+x2+" "+y2;
+    console.log(this.ex)
+   return this.ex
+  }
   updateNodes(){
     this.isShown =true;
     this.ArrOfNodes=[];
