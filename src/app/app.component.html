@@ -1,17 +1,20 @@
 <div class="Nodes">
-  Enter Number Of Nodes:<input class="node" type="text" [(ngModel)]="nodesNum">
+  Enter Number Of Nodes:<input class="node" type="text" [(ngModel)]="nodesNum" (click)="refresh()">
   <br>
   <button class="button" (click)="updateNodes()">Submit</button>
 </div>
 
+<div *ngIf="isShown">
 <div class="Table" *ngFor="let Node of ArrOfNodes">
   {{Node.node}} Forward connections :<input class="connection" [(ngModel)]="ArrForward[Node.num-1]"
     placeholder="ex:1,2,3">
   {{Node.node}} Forward Gain :<input type="text" class="gain" [(ngModel)]="ArrGainF[Node.num-1]" placeholder="ex:1,2,3">
 </div>
+</div>
 
 <button *ngIf="isShown" id="Submit1" class="button" (click)="calc()">Submit</button>
-<div style="width: auto;">
+
+<div style="width: auto;" *ngIf="submit1 && isShown">
   <svg>
     <g *ngFor="let node of ArrOfNodes">
       <g>
