@@ -42,7 +42,22 @@ export class AppComponent {
   refresh(){
     this.isShown=false;
   }
+  ex:string=""
+  curve(nd:number,num:number,x1:number,y1:number,x2:number,y2:number){
 
+    this.ex="M"+x1+" "+y1+","+"Q"+(x1+(nd-num)*100)+" "+(y1+(nd-num)*10)+","+(x2+this.max(x1,x2)*33)+" "+(y2);
+    //console.log(this.ex)
+   return this.ex
+  }
+   k:number=1;
+
+  max(x:number,y:number){
+
+    if(x>y)return this.k;
+
+    else return (-1*this.k);
+
+  }
   calc() {
     for (let i = 0; i < this.nodesNum - 1; i++) {
       let tempF: any = [];
