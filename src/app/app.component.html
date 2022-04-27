@@ -13,6 +13,8 @@
 </div>
 
 <button *ngIf="isShown" id="Submit1" class="button" (click)="calc()">Submit</button>
+<div id="Result"></div>
+<!-- *ngIf="isShown2" -->
 
 <div style="width: auto;" *ngIf="submit1 && isShown">
   <svg>
@@ -30,7 +32,7 @@
         <g *ngFor="let nd of ArrForward_res[node.num-1];let i = index">
           <path [attr.d]=curve(nd,node.num,100+node.num*200,100+(ArrOfNodes.length%node.num)*50,100+nd*200,100+(ArrOfNodes.length%nd)*50) stroke="black" fill="transparent" class="arrow" />
 
-         
+
           <text fill="black" font-size="15" font-family="Verdana" [attr.x]="100+node.num*200+(nd-node.num)*100"
             [attr.y]="100+(ArrOfNodes.length%node.num)*50+((nd)*20-(node.num)*20)/2">{{ArrGain_res[node.num-1][i]}}</text>
         </g>
