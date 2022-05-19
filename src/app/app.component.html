@@ -1,47 +1,43 @@
 <div class="Nodes">
-  Enter Number Of Nodes:<input class="node" type="text" [(ngModel)]="nodesNum"  >
+  Enter Number Of Nodes:<input class="node" type="text" [(ngModel)]="nodesNum" (click)="refresh()">
   <br>
-  <button class="button" (click)="updateNodes()" >Submit</button>
+  <button class="button" (click)="updateNodes()">Submit</button>
 </div>
 
+<div *ngIf="isShown">
 <div class="Table" *ngFor="let Node of ArrOfNodes">
-  {{Node.node}} Forward connections :<input class="connection" [(ngModel)]="ArrForward[Node.num-1]"  placeholder="ex:1,2,3">
+  {{Node.node}} Forward connections :<input class="connection" [(ngModel)]="ArrForward[Node.num-1]"
+    placeholder="ex:1,2,3">
   {{Node.node}} Forward Gain :<input type="text" class="gain" [(ngModel)]="ArrGainF[Node.num-1]" placeholder="ex:1,2,3">
 </div>
+</div>
 
-<button *ngIf="isShown"  id="Submit1" class="button" (click)="calc()" >Submit</button>
-<div style="width: auto;">
-<svg >
-    <g *ngFor="let node of ArrOfNodes" >
-        <g >
-            <circle
-                [attr.cx]="100+node.num*200"
-                [attr.cy]="100+(ArrOfNodes.length%node.num)*50"
-                [attr.r]="20"
-                fill="#ddd"
-                  stroke="red"
-                />
-                <text
-                fill="black" font-size="15" font-family="Verdana"
-                 [attr.x]="100+node.num*200-8"
-                 [attr.y]="100+(ArrOfNodes.length%node.num)*50+8">{{node.num}}</text>
-                 <defs>
-                  <marker id="markerArrow" markerWidth="13" markerHeight="13" refX="2" refY="6"
-                         orient="auto">
-                      <path d="M2,2 L2,11 L10,6 L2,2" style="fill: #000000;" />
-                  </marker>
-                 </defs>
-             <g *ngFor="let nd of ArrForward_res[node.num-1];let i = index">
+<button *ngIf="isShown" id="Submit1" class="button" (click)="calc()">Submit</button>
+<div id="Result"></div>
+<!-- *ngIf="isShown2" -->
 
-              <line [attr.x1]="100+node.num*200" [attr.y1]="100+(ArrOfNodes.length%node.num)*50" [attr.x2]="100+nd*200-(nd-node.num)*20" [attr.y2]="100+(ArrOfNodes.length%nd)*50" class="arrow" />
-              <text
-              fill="black" font-size="15" font-family="Verdana"
-               [attr.x]="100+node.num*200+(nd-node.num)*100"
-               [attr.y]="100+(ArrOfNodes.length%node.num)*50+((nd)*20-(node.num)*20)/2">{{ArrGain_res[node.num-1][i]}}</text>
-            </g>
-               
+<div style="width: auto;" *ngIf="submit1 && isShown">
+  <svg>
+    <g *ngFor="let node of ArrOfNodes">
+      <g>
+        <circle [attr.cx]="100+node.num*200" [attr.cy]="100+(ArrOfNodes.length%node.num)*50" [attr.r]="20" fill="#ddd"
+          stroke="red" />
+        <text fill="black" font-size="15" font-family="Verdana" [attr.x]="100+node.num*200-8"
+          [attr.y]="100+(ArrOfNodes.length%node.num)*50+8">{{node.num}}</text>
+        <defs>
+          <marker id="markerArrow" markerWidth="13" markerHeight="13" refX="2" refY="6" orient="auto">
+            <path d="M2,2 L2,11 L10,6 L2,2" style="fill: #000000;" />
+          </marker>
+        </defs>
+        <g *ngFor="let nd of ArrForward_res[node.num-1];let i = index">
+          <path [attr.d]=curve(nd,node.num,100+node.num*200,100+(ArrOfNodes.length%node.num)*50,100+nd*200,100+(ArrOfNodes.length%nd)*50) stroke="black" fill="transparent" class="arrow" />
+
+
+          <text fill="black" font-size="15" font-family="Verdana" [attr.x]="100+node.num*200+(nd-node.num)*100"
+            [attr.y]="100+(ArrOfNodes.length%node.num)*50+((nd)*20-(node.num)*20)/2">{{ArrGain_res[node.num-1][i]}}</text>
         </g>
-    </g>
-    </svg>
-  </div>
 
+      </g>
+    </g>
+  </svg>
+</div>
