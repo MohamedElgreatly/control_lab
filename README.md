@@ -22,4 +22,6 @@ Notes:
 Each team must submit the following:
  Use any programming language you want.
 
-
+Input and output images:
+  ![Input format](WhatsApp Image 2022-04-27 at 9.56.09 PM.jpeg)
+  ![output result](WhatsApp Image 2022-04-27 at 9.56.19 PM.jpeg)
