@@ -95,3 +95,12 @@ circle {
   stroke-width: 2;
   marker-end: url(#markerArrow)
 }
+#Result{
+  padding-left:10px ;
+  margin: 30px 0;
+  color: gray;
+  background-color: rgba(214, 207, 198, 0.389);
+  font-size: 40px;
+  font-weight: bold;
+  box-shadow: 2px 10px 10px 0px rgba(128, 128, 128, 0.573), -2px -5px 10px 0px rgba(128, 128, 128, 0.573);
+}

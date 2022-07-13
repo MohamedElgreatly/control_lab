@@ -44,26 +44,12 @@ export class Transfer_Function {
     private isNewLoop(path: Edge[]): boolean {
         let existed: boolean = false;
         for (let i = 0; i < this.loops.length; i++) {
-            if (this.loops[i].length == path.length) {
-                for (var d = 0; d < path.length; d++) {
-                    if (this.loops[i][d] == path[0]) {
-                        break;
-                    }
-                }
-                for (let k = 0; k < path.length; k++) {
-                    if (this.loops[i][(d + k) % path.length] == path[k]) {
-                        existed = true;
-                    } else {
-                        existed = false;
-                        break;
-                    }
-                }
-                if (existed) {
-                    return existed;
-                }
+            existed = path.every((val) => this.loops[i].includes(val));
+            if (existed && path.length == this.loops[i].length) {
+                return false;
             }
         }
-        return !existed;
+        return true;
     }
 
     private operate() {
@@ -80,7 +66,9 @@ export class Transfer_Function {
             for (let j = 0; j < last.next.length; j++) {
                 path.push(last.next[j]);
                 if (this.isLoop(path)) {
-                    this.loops.push(this.getLoop(path));
+                    if (this.isNewLoop(this.getLoop(path))) {
+                         this.loops.push(this.getLoop(path));
+                    }
                     path = path.slice(0, path.length - 1);
                     continue;
                 }
