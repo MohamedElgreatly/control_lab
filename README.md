@@ -1,27 +1,25 @@
-# Lab
+                              Signal Flow Graphs lab
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.3.
+Given:
+    Signal flow graph representation of the system. Assume that total number of nodes and numeric branches gains are given.
+Required:
+    1- Graphical interface.
+    2- Draw the signal flow graph showing nodes, branches, gains, …
+    3- Listing all forward paths, individual loops, all combination of n non-touching loops.
+    4- The values of  , 1 , …, m where m is number of forward paths.
+    5- Overall system transfer function.
+Notes:
+    a- Your executables and source code
+    b- Report should include: 
+        1) Problem Statement.
+        2) Main Features of the program and additional options if exists.
+        3) Data Structure.
+        4) Main modules.
+        5) Algorithms used.
+        6) Sample runs.
+        7) Simple user guide.
 
-## Development server
+Each team must submit the following:
+ Use any programming language you want.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
