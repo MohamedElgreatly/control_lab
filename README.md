@@ -1,4 +1,8 @@
-                              Signal Flow Graphs lab
+  # Group of 6 (mohamed elgreatly -mahmoud ramzy - mahmoud fathalla -- ahmed ezz -abdelatif khalid -- ayman mohamed)
+  
+  
+  Signal Flow Graphs lab
+  
 
 Given:
     Signal flow graph representation of the system. Assume that total number of nodes and numeric branches gains are given.
